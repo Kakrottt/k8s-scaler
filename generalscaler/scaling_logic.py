@@ -1,7 +1,7 @@
 # generalscaler/scaling_logic.py
 from .metrics import get_metric_plugin
 from .policies import get_policy
-from .safety import can_scale, apply_safety_limits, now_utc
+from .safety import can_scale, apply_safety_limits
 
 
 def reconcile_scaler(k8s_client, gs_body: dict):
