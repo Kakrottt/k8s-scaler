@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: general-scaler-controller
+  namespace: general-scaler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: general-scaler-controller
+  template:
+    metadata:
+      labels:
+        app: general-scaler-controller
+    spec:
+      serviceAccountName: general-scaler-sa
+      containers:
+        - name: controller
+          image: kakrottt/scaler:latest
+          imagePullPolicy: IfNotPresent
+          # same as your Dockerfile ENTRYPOINT: python -m generalscaler.main
+          # command: ["python", "-m", "generalscaler.main"]
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"

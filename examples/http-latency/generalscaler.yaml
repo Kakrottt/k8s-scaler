@@ -1,0 +1,37 @@
+# examples/http-latency/generalscaler.yaml
+apiVersion: scaling.devsecops.ai/v1alpha1
+kind: GeneralScaler
+metadata:
+  name: http-latency-scaler
+  namespace: demo
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: http-frontend
+  metric:
+    type: latency
+    plugin: prometheus
+    targetValue: 200 # ms
+    params:
+      baseUrl: http://fake-prometheus.demo:9090
+      # baseUrl: http://localhost:9090
+      query: ignored_query
+      # baseUrl: http://prometheus.monitoring:9090
+      # query: |
+      #   histogram_quantile(
+      #     0.95,
+      #     sum(rate(http_request_duration_seconds_bucket{app="http-frontend"}[5m]))
+      #     by (le)
+      #   ) * 1000
+  policy:
+    type: slo
+    slo:
+      objective: 200 # 95p latency target
+      windowSeconds: 300
+  safety:
+    minReplicas: 2
+    maxReplicas: 5
+    maxScaleUpStep: 5
+    maxScaleDownStep: 3
+    cooldownSeconds: 60

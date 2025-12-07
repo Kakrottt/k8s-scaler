@@ -1,0 +1,5 @@
+kopf
+kubernetes
+requests
+redis
+google-cloud-pubsub

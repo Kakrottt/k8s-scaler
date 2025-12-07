@@ -1,0 +1,74 @@
+# Python cache / bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+.eggs/
+
+# Virtual environment
+.env
+.venv
+venv/
+ENV/
+env/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+pip-wheel-metadata/
+.wheels/
+*.whl
+
+# Test / coverage
+.coverage
+.coverage.*
+.cache/
+.nox/
+.tox/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints
+
+# IDE / editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System / OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docker files (optional)
+docker-compose.yml
+Dockerfile
+
+# Logs
+*.log
+
+# Local config & secrets
+*.env
+*.local
+config/*.yaml
+config/*.yml
+
+# Notebooks output (optional)
+*.csv
+*.tsv
+*.out
+
+# Static / media (if generated)
+media/
+staticfiles/
+
+# App-specific temp folders
+tmp/

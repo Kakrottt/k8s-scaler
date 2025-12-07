@@ -1,0 +1,30 @@
+# examples/worker-redis-queue/generalscaler.yaml
+apiVersion: scaling.devsecops.ai/v1alpha1
+kind: GeneralScaler
+metadata:
+  name: worker-queue-scaler
+  namespace: demo
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: worker
+  metric:
+    type: queue
+    plugin: redis
+    targetValue: 50 # target: 50 queued tasks per replica
+    params:
+      host: redis
+      port: 6379
+      db: 0
+      key: jobs-queue
+  policy:
+    type: slo
+    slo:
+      objective: 50 # tasks per replica
+  safety:
+    minReplicas: 1
+    maxReplicas: 30
+    maxScaleUpStep: 10
+    maxScaleDownStep: 5
+    cooldownSeconds: 120

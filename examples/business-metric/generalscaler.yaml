@@ -1,0 +1,30 @@
+# examples/business-metric/generalscaler.yaml
+apiVersion: scaling.devsecops.ai/v1alpha1
+kind: GeneralScaler
+metadata:
+  name: business-metric-cost-scaler
+  namespace: demo
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reports-api
+  metric:
+    type: business
+    plugin: prometheus
+    targetValue: 1000 # target processed jobs per replica
+    params:
+      baseUrl: http://prometheus.monitoring:9090
+      query: sum(rate(completed_reports_total[5m]))
+  policy:
+    type: cost
+    cost:
+      maxMonthlyCost: 200 # USD
+      costPerReplicaPerHour: 0.04 # example
+      metricTarget: 1000
+  safety:
+    minReplicas: 1
+    maxReplicas: 50
+    maxScaleUpStep: 10
+    maxScaleDownStep: 10
+    cooldownSeconds: 120

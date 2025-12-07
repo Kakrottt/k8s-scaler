@@ -1,0 +1,67 @@
+# Bytecode / cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Packages / distribution
+build/
+dist/
+develop-eggs/
+eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+.wheels/
+pip-wheel-metadata/
+
+# Logs
+*.log
+
+# Testing / coverage
+.coverage
+.coverage.*
+.cache/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Local config / secrets
+*.env
+*.local
+config.local.*
+secrets.yaml
+secrets.yml
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Mypy / lint / static analysis
+.mypy_cache/
+.pyre/
+.pytype/
+ruff_cache/
+
+# Docker / container
+docker-compose.override.yml
