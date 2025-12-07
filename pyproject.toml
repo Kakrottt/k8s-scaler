@@ -23,3 +23,7 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203"]
