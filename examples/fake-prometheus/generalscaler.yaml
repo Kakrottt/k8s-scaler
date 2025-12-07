@@ -1,0 +1,27 @@
+apiVersion: scaling.devsecops.ai/v1alpha1
+kind: GeneralScaler
+metadata:
+  name: http-latency-scaler
+  namespace: demo
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: http-frontend
+  metric:
+    type: latency
+    plugin: prometheus
+    targetValue: 200 # desired latency in ms
+    params:
+      mockValue: 450 # <<< forces "high latency" for tests
+  policy:
+    type: slo
+    slo:
+      objective: 200
+      windowSeconds: 300
+  safety:
+    minReplicas: 2
+    maxReplicas: 10
+    maxScaleUpStep: 3
+    maxScaleDownStep: 2
+    cooldownSeconds: 30

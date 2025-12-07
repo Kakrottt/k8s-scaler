@@ -23,7 +23,7 @@ spec:
           # Add latency metric via dummy endpoint to Prometheus (simulated)
           env:
             - name: RESPONSE_DELAY_MS
-              value: "100" # increase to simulate load
+              value: "100"
 ---
 apiVersion: v1
 kind: Service

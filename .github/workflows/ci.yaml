@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: pip install black flake8
+      - run: black --check generalscaler tests
+      - run: flake8 generalscaler tests
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: pip install pytest
+      - run: pytest tests/unit
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+    needs: [lint, unit-tests]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: helm/kind-action@v1.10.0
+        with:
+          cluster_name: general-scaler-ci
+      - run: pip install -r requirements.txt pytest
+      - name: Build and load controller image
+        run: |
+          docker build -t general-scaler:ci .
+          kind load docker-image general-scaler:ci --name general-scaler-ci
+      - name: Install operator via Helm
+        run: |
+          helm install general-scaler ./charts/general-scaler \
+            --set image.repository=general-scaler \
+            --set image.tag=ci
+      - name: Run e2e tests
+        run: pytest tests/e2e -m e2e
