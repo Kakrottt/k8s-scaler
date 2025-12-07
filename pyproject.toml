@@ -8,3 +8,18 @@ version = "0.1.0"
 
 [tool.setuptools.packages.find]
 where = ["generalscaler"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310", "py311"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.venv
+  | build
+  | dist
+)/
+'''
