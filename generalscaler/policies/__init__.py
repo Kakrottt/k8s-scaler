@@ -7,6 +7,7 @@ POLICY_MAP = {
     "cost": CostPolicy,
 }
 
+
 def get_policy(name: str, spec: dict):
     cls = POLICY_MAP.get(name)
     if not cls:

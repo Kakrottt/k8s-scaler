@@ -11,7 +11,7 @@ class PrometheusMetricPlugin(MetricPlugin):
 
         # 2) Real Prometheus query mode
         base_url = self.params["baseUrl"]  # e.g. http://prometheus.monitoring:9090
-        query = self.params["query"]       # e.g. histogram_quantile(...)
+        query = self.params["query"]  # e.g. histogram_quantile(...)
 
         resp = requests.get(
             f"{base_url}/api/v1/query",

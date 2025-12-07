@@ -3,6 +3,7 @@ from .metrics import get_metric_plugin
 from .policies import get_policy
 from .safety import can_scale, apply_safety_limits, now_utc
 
+
 def reconcile_scaler(k8s_client, gs_body: dict):
     spec = gs_body["spec"]
     status = gs_body.get("status", {})
@@ -33,7 +34,9 @@ def reconcile_scaler(k8s_client, gs_body: dict):
     last_scale_time = status.get("lastScaleTime")
     cooldown = safety_spec.get("cooldownSeconds", 60)
 
-    should_scale = desired_safe != current_replicas and can_scale(last_scale_time, cooldown)
+    should_scale = desired_safe != current_replicas and can_scale(
+        last_scale_time, cooldown
+    )
 
     result = {
         "metricValue": metric_value,

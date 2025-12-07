@@ -2,6 +2,7 @@
 from google.cloud import pubsub_v1
 from .base import MetricPlugin
 
+
 class PubSubMetricPlugin(MetricPlugin):
     def __init__(self, params: dict):
         super().__init__(params)

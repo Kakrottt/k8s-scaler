@@ -2,6 +2,7 @@
 import pytest
 from generalscaler.metrics.prometheus import PrometheusMetricPlugin
 
+
 @pytest.mark.unit
 def test_prometheus_mock_value():
     plugin = PrometheusMetricPlugin({"mockValue": 321})

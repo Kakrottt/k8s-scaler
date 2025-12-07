@@ -9,6 +9,7 @@ PLUGIN_MAP = {
     "pubsub": PubSubMetricPlugin,
 }
 
+
 def get_metric_plugin(name: str, params: dict):
     cls = PLUGIN_MAP.get(name)
     if not cls:

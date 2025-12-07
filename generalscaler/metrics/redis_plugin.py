@@ -16,6 +16,7 @@ from .base import MetricPlugin
 #         length = self.client.llen(key)
 #         return float(length)
 
+
 class RedisMetricPlugin(MetricPlugin):
     def __init__(self, params: dict):
         super().__init__(params)

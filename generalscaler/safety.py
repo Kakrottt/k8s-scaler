@@ -1,8 +1,10 @@
 # generalscaler/safety.py
 from datetime import datetime, timezone
 
+
 def now_utc():
     return datetime.now(timezone.utc)
+
 
 def can_scale(last_scale_time: str | None, cooldown_seconds: int) -> bool:
     if not last_scale_time:
@@ -10,6 +12,7 @@ def can_scale(last_scale_time: str | None, cooldown_seconds: int) -> bool:
     last = datetime.fromisoformat(last_scale_time)
     elapsed = (now_utc() - last).total_seconds()
     return elapsed >= cooldown_seconds
+
 
 def apply_safety_limits(
     desired: int,

@@ -1,6 +1,7 @@
 # generalscaler/metrics/base.py
 from abc import ABC, abstractmethod
 
+
 class MetricPlugin(ABC):
     def __init__(self, params: dict):
         self.params = params or {}

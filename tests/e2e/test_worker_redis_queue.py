@@ -7,7 +7,6 @@ import pytest
 from tests.e2e.conftest import kubectl, wait_for_deployment_replicas, E2E_NAMESPACE
 
 
-
 @pytest.mark.e2e
 def test_worker_redis_queue_scaler_scales_with_mock_queue():
     """
@@ -43,17 +42,7 @@ def test_worker_redis_queue_scaler_scales_with_mock_queue():
         E2E_NAMESPACE,
         "--type=merge",
         "-p",
-        json.dumps(
-            {
-                "spec": {
-                    "metric": {
-                        "params": {
-                            "mockQueueLength": 1000
-                        }
-                    }
-                }
-            }
-        ),
+        json.dumps({"spec": {"metric": {"params": {"mockQueueLength": 1000}}}}),
     )
 
     time.sleep(10)
@@ -70,17 +59,7 @@ def test_worker_redis_queue_scaler_scales_with_mock_queue():
         E2E_NAMESPACE,
         "--type=merge",
         "-p",
-        json.dumps(
-            {
-                "spec": {
-                    "metric": {
-                        "params": {
-                            "mockQueueLength": 10
-                        }
-                    }
-                }
-            }
-        ),
+        json.dumps({"spec": {"metric": {"params": {"mockQueueLength": 10}}}}),
     )
 
     time.sleep(10)

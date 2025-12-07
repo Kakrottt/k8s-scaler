@@ -2,6 +2,7 @@
 import pytest
 from generalscaler.metrics.redis_plugin import RedisMetricPlugin
 
+
 @pytest.mark.unit
 def test_redis_mock_queue_length():
     plugin = RedisMetricPlugin({"mockQueueLength": 123})

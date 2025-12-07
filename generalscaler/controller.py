@@ -7,6 +7,7 @@ from kubernetes.config.config_exception import ConfigException
 from .scaling_logic import reconcile_scaler
 from .safety import now_utc
 
+
 # config.load_incluster_config()
 # k8s = k8s_client
 def load_kube_config():
@@ -19,16 +20,21 @@ def load_kube_config():
         config.load_kube_config()
         print("Loaded local kubeconfig (e.g. ~/.kube/config)")
 
+
 # Call this once at import time
 load_kube_config()
+
 
 @kopf.on.startup()
 def configure(settings: kopf.OperatorSettings, **_):
     settings.posting.level = logging.INFO
 
+
 @kopf.on.create("generalscalers", group="scaling.devsecops.ai", version="v1alpha1")
 @kopf.on.update("generalscalers", group="scaling.devsecops.ai", version="v1alpha1")
-@kopf.timer("generalscalers", group="scaling.devsecops.ai", version="v1alpha1", interval=30.0)
+@kopf.timer(
+    "generalscalers", group="scaling.devsecops.ai", version="v1alpha1", interval=30.0
+)
 def reconcile(body, spec, status, namespace, logger, **kwargs):
     result = reconcile_scaler(k8s_client, body)
 

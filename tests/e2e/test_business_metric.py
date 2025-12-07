@@ -70,15 +70,7 @@ def test_business_metric_cost_scaler_respects_budget_and_metric():
         "--type=merge",
         "-p",
         json.dumps(
-            {
-                "spec": {
-                    "metric": {
-                        "params": {
-                            "mockValue": 100  # below metricTarget
-                        }
-                    }
-                }
-            }
+            {"spec": {"metric": {"params": {"mockValue": 100}}}}  # below metricTarget
         ),
     )
 
