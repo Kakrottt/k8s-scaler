@@ -48,6 +48,8 @@ jobs:
       - name: Install operator via Helm
         run: |
           helm install general-scaler ./charts/general-scaler \
+            --namespace general-scaler \
+            --create-namespace \
             --set image.repository=general-scaler \
             --set image.tag=ci
       - name: Run e2e tests
