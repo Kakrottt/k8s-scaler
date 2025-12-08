@@ -15,11 +15,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy operator code
 COPY generalscaler/ ./generalscaler/
-# COPY setup.py pyproject.toml* . 2>/dev/null || true
+COPY pyproject.toml setup.py* ./
+RUN pip install .
 
 # Create non-root user with a name that doesn't clash
 RUN useradd -u 1001 -m gs-operator
 USER gs-operator
+
+# Kopf operator entrypoint
+ENV KOPF_RUN=1
 
 # Run the operator via kopf
 # Either:

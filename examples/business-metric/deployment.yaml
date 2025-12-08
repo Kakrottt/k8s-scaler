@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-api
+  labels:
+    app: reports-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: reports-api
+  template:
+    metadata:
+      labels:
+        app: reports-api
+    spec:
+      containers:
+        - name: reports-api
+          image: nginxdemos/hello:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: KPI_SOURCE
+              value: "static"
+            - name: KPI_UPDATE_INTERVAL_SEC
+              value: "30"

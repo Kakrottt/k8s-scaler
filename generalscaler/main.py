@@ -1,7 +1,6 @@
 # generalscaler/main.py
 import kopf
-from . import controller  # noqa: F401
-
+from . import controller
 
 def main():
     kopf.run(standalone=True)

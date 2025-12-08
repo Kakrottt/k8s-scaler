@@ -14,8 +14,8 @@ spec:
     plugin: prometheus
     targetValue: 200 # ms
     params:
-      baseUrl: http://fake-prometheus.demo:9090
-      # baseUrl: http://localhost:9090
+      # baseUrl: http://fake-prometheus.demo:9090
+      baseUrl: http://localhost:9090
       query: ignored_query
       # baseUrl: http://prometheus.monitoring:9090
       # query: |
