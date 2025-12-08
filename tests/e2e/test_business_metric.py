@@ -18,7 +18,9 @@ def test_business_metric_cost_scaler_respects_budget_and_metric():
     """
 
     # 1) Deploy the business service (reports-api) if you have a manifest for it:
-    kubectl("apply", "-n", E2E_NAMESPACE, "-f", "examples/business-metric/deployment.yaml")
+    kubectl(
+        "apply", "-n", E2E_NAMESPACE, "-f", "examples/business-metric/deployment.yaml"
+    )
 
     # 2) Apply the GeneralScaler for business metric
     kubectl(
