@@ -21,13 +21,12 @@ def load_kube_config():
         print("Loaded local kubeconfig (e.g. ~/.kube/config)")
 
 
-# Call this once at import time
-load_kube_config()
-
-
 @kopf.on.startup()
 def configure(settings: kopf.OperatorSettings, **_):
+    # Call this once at import time
+    load_kube_config()
     settings.posting.level = logging.INFO
+    # logging.getLogger().setLevel(logging.INFO)
 
 
 @kopf.on.create("generalscalers", group="scaling.devsecops.ai", version="v1alpha1")

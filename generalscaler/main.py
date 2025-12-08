@@ -1,8 +1,10 @@
 # generalscaler/main.py
 import kopf
+import logging
 from . import controller
 
 def main():
+    logging.basicConfig(level=logging.INFO)
     kopf.run(standalone=True)
 
 

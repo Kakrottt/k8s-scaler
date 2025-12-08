@@ -19,8 +19,8 @@ COPY pyproject.toml setup.py* ./
 RUN pip install .
 
 # Create non-root user with a name that doesn't clash
-RUN useradd -u 1001 -m gs-operator
-USER gs-operator
+# RUN useradd -u 1001 -m gs-operator
+# USER gs-operator
 
 # Kopf operator entrypoint
 ENV KOPF_RUN=1

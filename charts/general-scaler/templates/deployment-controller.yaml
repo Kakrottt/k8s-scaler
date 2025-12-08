@@ -16,8 +16,8 @@ spec:
       serviceAccountName: general-scaler-sa
       containers:
         - name: controller
-          image: kakrottt/scaler:latest
-          imagePullPolicy: IfNotPresent
+          image: kakrottt/scaler:v7
+          imagePullPolicy: Always
           # same as your Dockerfile ENTRYPOINT: python -m generalscaler.main
           # command: ["python", "-m", "generalscaler.main"]
           env:
