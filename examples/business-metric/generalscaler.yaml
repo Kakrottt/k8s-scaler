@@ -19,9 +19,8 @@ spec:
   policy:
     type: cost
     cost:
-      maxMonthlyCost: 200 # USD
-      costPerReplicaPerHour: 0.04 # example
-      metricTarget: 1000
+      maxMonthlyCost: 200
+      costPerReplicaPerHour: 5
   safety:
     minReplicas: 1
     maxReplicas: 50

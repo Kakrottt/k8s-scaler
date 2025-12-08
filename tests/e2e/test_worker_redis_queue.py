@@ -16,8 +16,7 @@ def test_worker_redis_queue_scaler_scales_with_mock_queue():
     """
 
     # If you have a worker deployment manifest, apply it here.
-    # Example (adjust path if different):
-    # kubectl("apply", "-n", E2E_NAMESPACE, "-f", "examples/worker-redis-queue/worker-deployment.yaml")
+    kubectl("apply", "-n", E2E_NAMESPACE, "-f", "examples/worker-redis-queue/deployment.yaml")
 
     # Apply GeneralScaler (it should reference the 'worker' deployment)
     kubectl(
