@@ -20,7 +20,8 @@ spec:
     type: cost
     cost:
       maxMonthlyCost: 200
-      costPerReplicaPerHour: 5
+      costPerReplicaPerHour: 0.04
+      metricTarget: 1000
   safety:
     minReplicas: 1
     maxReplicas: 50
