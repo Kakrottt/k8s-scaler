@@ -34,7 +34,8 @@ def configure(settings: kopf.OperatorSettings, **_):
 @kopf.timer(
     "generalscalers", group="scaling.devsecops.ai", version="v1alpha1", interval=30.0
 )
-def reconcile(body, spec, status, namespace, logger, **kwargs):
+def reconcile(body, spec, status, namespace, logger, patch, **kwargs):
+    status = status or {}
     result = reconcile_scaler(k8s_client, body)
 
     logger.info(
@@ -62,12 +63,18 @@ def reconcile(body, spec, status, namespace, logger, **kwargs):
         last_reason = status.get("lastScaleReason")
         desired_replicas = status.get("desiredReplicas", result["currentReplicas"])
 
-    return {
-        "status": {
-            "currentReplicas": result["currentReplicas"],
-            "desiredReplicas": desired_replicas,
-            "lastMetricValue": result["metricValue"],
-            "lastScaleTime": last_scale_time,
-            "lastScaleReason": last_reason,
-        }
-    }
+    # return {
+    #     "status": {
+    #         "currentReplicas": result["currentReplicas"],
+    #         "desiredReplicas": desired_replicas,
+    #         "lastMetricValue": result["metricValue"],
+    #         "lastScaleTime": last_scale_time,
+    #         "lastScaleReason": last_reason,
+    #     }
+    # }
+    # "Patching failed with inconsistencies" warnings.
+    patch.status["currentReplicas"] = result["currentReplicas"]
+    patch.status["desiredReplicas"] = desired_replicas
+    patch.status["lastMetricValue"] = result["metricValue"]
+    patch.status["lastScaleTime"] = last_scale_time
+    patch.status["lastScaleReason"] = last_reason
